@@ -4,22 +4,22 @@ library(epiphytoolR)
 # source("~/R/downy_dst/R/impute_temp.R")
 # source("~/R/downy_dst/R/impute_rh.R")
 
-if(Sys.info()["nodename"] == "rstudio") {
+#if(Sys.info()["nodename"] == "rstudio") {
   # update libraries for the shiny server
-  source("~/R/update_libraries.R")
+  #source("~/R/update_libraries.R")
   # read in latest data
-  NT_weather <- fread("~/Weather observations/NTamborine.csv")
-  AT_weather <- fread("~/Weather observations/23-23_Applethorpe.csv")
-  LX_weather <- fread("~/Weather observations/23-23_LoxtonResearch.csv")
-  MI_weather <- fread("~/Weather observations/23-23_MilduraAP.csv")
-  WA_weather <- fread("~/Weather observations/23-23_WalpeupResearch.csv")
-} else{
+  NT_weather <- fread("~/Weather observations/23-24_NTamborine.csv")
+  AT_weather <- fread("~/Weather observations/23-24_Applethorpe.csv")
+  LX_weather <- fread("~/Weather observations/23-24_LoxtonResearch.csv")
+  MI_weather <- fread("~/Weather observations/23-24_MilduraAP.csv")
+  WA_weather <- fread("~/Weather observations/23-24_WalpeupResearch.csv")
+#} else{
   # read in the raw data
   NT_weather <- data.table::fread(
     system.file("extdata",
                 "weather_north_tamborine.csv",
                 package = "viticolaR"))
-}
+#}
 
 
 NT_weather[,lon := 153.1914]
@@ -126,6 +126,12 @@ suppressWarnings(
 WA_weather <- impute_temp(WA_weather, rolling_window = 60)
 WA_weather <- impute_rh(WA_weather, rolling_window = 60)
 
+# create standard deviation of wind speed
+# given the wikipedia description between wind gusts and average wind speed
+# we will use 1 sd as half the difference between wind speed and wind gusts
+MI_weather[, wsp_sd := (gust_kmh - wind_spd_kmh)/2]
+MI_weather[,wdir_sd := 50]
+
 suppressWarnings(
   MI_weather <-
     epiphytoolR::format_weather(
@@ -137,6 +143,7 @@ suppressWarnings(
       rh = "rel_hum",
       ws = "wind_spd_kmh",
       wd = "wind_dir_deg",
+      wd_sd = "wdir_sd",
       station = "name",
       lon = "lon",
       lat = "lat",
@@ -438,6 +445,9 @@ if(nrow(WA_weather[is.na(rain)]) >=1) {
 #    WA_weather[,c("tm_imp", "rh_imp"):= list(NULL,NULL)]}
 # if(all(c("tm_imp", "rh_imp") %in% colnames(LX_weather))){
 #    LX_weather[,c("tm_imp", "rh_imp"):= list(NULL,NULL)]}
+
+# remove gatton from tamborine
+NT_weather <- NT_weather[station == "PORTABLE QFRJ (North Tamborine)"]
 
 DMod_NT <- viticolaR::estimate_DM_PI(NT_weather)
 DMod_AT <- viticolaR::estimate_DM_PI(AT_weather)
