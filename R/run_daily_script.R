@@ -1,3 +1,6 @@
+if("remotes" %in% installed.packages()[,"Package"] == FALSE){
+  install.packages("remotes")
+}
 if("data.table" %in% installed.packages()[,"Package"] == FALSE){
   install.packages("data.table")
 }
