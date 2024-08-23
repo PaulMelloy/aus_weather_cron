@@ -15,8 +15,10 @@ git clone https://github.com/PaulMelloy/aus_weather_cron
 ```
 
 Test run the scripts
+run with sudo privileges if lib is not writable, or ensure default R package library
+is writable.  
 
-```bach
+```bash
 cd aus_weather_cron
-Rscript R/run_daily_script.R
+sudo Rscript R/run_daily_script.R
 ```
