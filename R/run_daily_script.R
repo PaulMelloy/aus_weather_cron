@@ -4,12 +4,8 @@ if("remotes" %in% installed.packages()[,"Package"] == FALSE){
 if("data.table" %in% installed.packages()[,"Package"] == FALSE){
   install.packages("data.table")
 }
-if("epiphytoolR" %in% installed.packages()[,"Package"] == FALSE){
-  remotes::install_github("PaulMelloy/epiphytoolR", ref = "dev")
-}
 library(data.table)
-library(epiphytoolR)
-#source("/homevol/pmelloy/R/BarleyNetBlotchMeta/R/merge_axf_weather.R")
+source("./R/get_bom_observations.R")
 
 ## -----------------        Settings        -----------------
 SLEEP <- TRUE
