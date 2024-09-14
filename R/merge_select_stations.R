@@ -1,6 +1,11 @@
 # Uncompress select stations and merge the data into one file for downstream
 #  Processing
-
+# This is a sub-script of run_daily_script.R and assumes the following are in the
+#  global environment
+#   - dlpath
+#   - dltime
+#   - weather_path
+#   - merge_axf_weather or library(epiphytoolR)
 
 # North Tamborine: IDQ60910.99123.axf
 merge_axf_weather(File_compressed = paste0(dl_path,dl_time,"_IDQ60910.tgz"),
