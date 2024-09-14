@@ -4,21 +4,30 @@ if("remotes" %in% installed.packages()[,"Package"] == FALSE){
 if("data.table" %in% installed.packages()[,"Package"] == FALSE){
   install.packages("data.table")
 }
+if("epiphytoolR" %in% installed.packages()[,"Package"] == FALSE){
+   remotes::install_github("PaulMelloy/epiphytoolR", ref = "dev",
+                           lib = "~/R/x86_64-pc-linux-gnu-library/4.4")
+}
+
+working_dir <- path.expand("~/") # default to users home directory
+
 library(data.table)
-source("./R/get_bom_observations.R")
+library(epiphytoolR)
+library(viticolaR)
+source(paste0(working_dir,"aus_weather_cron/R/get_bom_observations.R"))
 
 ## -----------------        Settings        -----------------
 SLEEP <- TRUE
 dl_path <- paste0(tempdir(),"/")
 dl_time <- format(Sys.time(), format = "%y%m%d_%H%M")
-weather_path <- path.expand("~/weather_data")
+weather_path <- paste0(working_dir,"weather_data")
 
 
-## ----------            System checks            ----------- 
+## ----------            System checks            -----------
 if(dir.exists(weather_path) == FALSE) dir.create(weather_path,recursive = TRUE)
 
 
-## ----------        Download weather data        ----------- 
+## ----------        Download weather data        -----------
 
 aus_states <- c("QLD", "NSW", "NT", "TAS","WA", "VIC", "SA")
 lapply(aus_states,function(STATE){
@@ -35,7 +44,7 @@ lapply(aus_states,function(STATE){
 
 
 
-source("./R/merge_select_stations.R")
+source(paste0(working_dir,"aus_weather_cron/R/merge_select_stations.R"))
 
 
 
@@ -65,7 +74,7 @@ source("./R/merge_select_stations.R")
 # ----------------------------
 # # # find files with desired weather files
 # zipfiles <- list.files(dl_path,pattern = "_IDS60910.tgz")
-# 
+#
 # for(i in zipfiles){
 #    # Create weather for Applethorpe
 #    #  Stanthorpe only records 3 hourly
@@ -75,7 +84,7 @@ source("./R/merge_select_stations.R")
 #                      base_dir = weather_path,
 #                      verbose = TRUE
 #    )
-# 
+#
 #  }
 #    merge_axf_weather(File_compressed = "/homevol/pmelloy/Weather observations/tgz/230825_1513_IDW60910.tgz",
 #                      File_axf = "IDW60910.95641.axf",
