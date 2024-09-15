@@ -6,24 +6,24 @@ if("data.table" %in% installed.packages()[,"Package"] == FALSE){
 }
 if("epiphytoolR" %in% installed.packages()[,"Package"] == FALSE){
    remotes::install_github("PaulMelloy/epiphytoolR", ref = "dev",
-                           lib = "~/R/x86_64-pc-linux-gnu-library/4.4")
+                           lib = "/home/shared/lib/R")
 }
 
 working_dir <- path.expand("~/") # default to users home directory
 
 library(data.table)
 library(epiphytoolR)
-library(viticolaR)
 source(paste0(working_dir,"aus_weather_cron/R/get_bom_observations.R"))
 
 ## -----------------        Settings        -----------------
 SLEEP <- TRUE
-dl_path <- paste0(tempdir(),"/")
+dl_path <- paste0(working_dir,"weather_data/tgz/")
 dl_time <- format(Sys.time(), format = "%y%m%d_%H%M")
 weather_path <- paste0(working_dir,"weather_data")
 
 
 ## ----------            System checks            -----------
+if(dir.exists(dl_path) == FALSE) dir.create(dl_path,recursive = TRUE)
 if(dir.exists(weather_path) == FALSE) dir.create(weather_path,recursive = TRUE)
 
 
