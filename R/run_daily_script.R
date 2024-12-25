@@ -95,20 +95,13 @@ merge_weather(File_compressed = paste0(dl_path,dl_time,"_IDS60910.tgz"),
               base_dir = weather_path
 )
 
-
-
-
-
-
-
-
 # Update weather for Witchcliffe station.csv
 # errors because some weather data files are empty
-# merge_axf_weather(File_compressed = paste0("/homevol/pmelloy/Weather observations/tgz/240101_1500_IDW60910.tgz"),
-#                   station_file = "IDW60910.95641.json",
-#                   File_formatted = "23-24_WitchcliffeWest.csv",
-#                   base_dir = weather_path
-# )
+merge_weather(File_compressed = paste0("/homevol/pmelloy/Weather observations/tgz/240101_1500_IDW60910.tgz"),
+                  station_file = "IDW60910.95641.json",
+                  File_formatted = "23-24_WitchcliffeWest.csv",
+                  base_dir = weather_path
+)
 
 #source("~/R/preformat_Ntamborine_data.R")
 
