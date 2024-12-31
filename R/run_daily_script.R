@@ -6,7 +6,7 @@ if("data.table" %in% installed.packages()[,"Package"] == FALSE){
 }
 if("epiphytoolR" %in% installed.packages()[,"Package"] == FALSE){
    remotes::install_github("PaulMelloy/epiphytoolR", ref = "dev",
-                           lib = "/home/shared/lib/R")
+                           lib = "/home/shared/R/lib")
 }
 
 working_dir <- path.expand("~") # default to users home directory
