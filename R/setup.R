@@ -15,9 +15,9 @@ library(epiphytoolR)
 
 ## -----------------        Settings        -----------------
 SLEEP <- TRUE
-dl_path <- file.path(working_dir,"Documents/weather/tgz/")
+dl_path <- file.path(working_dir,"weather_data/tgz/")
 dl_time <- format(Sys.time(), format = "%y%m%d_%H%M")
-weather_path <- file.path(working_dir,"Documents/weather/")
+weather_path <- file.path(working_dir,"weather_data/")
 
 
 ## ----------            System checks            -----------

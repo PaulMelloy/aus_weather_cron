@@ -1,5 +1,9 @@
+if("here" %in% installed.packages()[,"Package"] == FALSE){
+  install.packages("here")
+}
+
 # setup environment
-source("R/setup.R",
+source(here::here("R/setup.R"),
        echo = TRUE,
        print.eval = TRUE)
 
