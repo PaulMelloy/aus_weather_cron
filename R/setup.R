@@ -12,13 +12,12 @@ working_dir <- path.expand("~") # default to users home directory
 
 library(data.table)
 library(epiphytoolR)
-#source(paste0(working_dir,"aus_weather_cron/R/get_bom_observations.R"))
 
 ## -----------------        Settings        -----------------
 SLEEP <- TRUE
-dl_path <- file.path(working_dir,"weather_data/tgz/")
+dl_path <- file.path(working_dir,"Documents/weather/tgz/")
 dl_time <- format(Sys.time(), format = "%y%m%d_%H%M")
-weather_path <- file.path(working_dir,"weather_data")
+weather_path <- file.path(working_dir,"Documents/weather/")
 
 
 ## ----------            System checks            -----------
