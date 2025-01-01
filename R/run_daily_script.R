@@ -3,7 +3,7 @@ if("here" %in% installed.packages()[,"Package"] == FALSE){
 }
 
 # setup environment
-source(here::here("R/setup.R"),
+source(here::here("aus_weather_cron/R/setup.R"),
        echo = TRUE,
        print.eval = TRUE)
 
