@@ -1,5 +1,5 @@
 # setup environment
-source("R/setup.R",
+source("~/aus_weather_cron/R/setup.R",
        echo = TRUE,
        print.eval = TRUE)
 
