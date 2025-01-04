@@ -1,5 +1,6 @@
 # setup environment
-source("R/setup.R",
+library(here)
+source(here("R/setup.R"),
        echo = TRUE,
        print.eval = TRUE)
 
