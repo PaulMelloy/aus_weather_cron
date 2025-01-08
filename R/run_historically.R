@@ -11,9 +11,9 @@ return_verbose = TRUE
 # ----------------------------
 # # find files with desired weather files
 
-# ---------------
+# -----------------
 # South Australia
-# ---------------
+# -----------------
 zipfiles <- list.files(dl_path,pattern = "_IDS60910.tgz",full.names = TRUE)
 
 for(i in zipfiles){
@@ -36,9 +36,9 @@ for(i in zipfiles){
   
 }
 
-# ---------------
+# -----------------
 # Queensland
-# ---------------
+# -----------------
 zipfiles <- list.files(dl_path,pattern = "_IDQ60910.tgz",full.names = TRUE)
 
 for(i in zipfiles){
@@ -67,9 +67,9 @@ for(i in zipfiles){
   )
 }
 
-# ---------------
+# -----------------
 # Victoria
-# ---------------
+# -----------------
 
 zipfiles <- list.files(dl_path,pattern = "_IDV60910.tgz",full.names = TRUE)
 
@@ -92,3 +92,23 @@ for(i in zipfiles){
   
  }
   
+
+# -----------------
+# Western Australia
+# -----------------
+# Update weather for Witchcliffe station.csv
+# errors because some weather data files are empty
+
+
+zipfiles <- list.files(dl_path,pattern = "_IDW60910.tgz",full.names = TRUE)
+
+for(i in zipfiles){
+  # Update weather for Mildura Airport
+  merge_weather(File_compressed = i,
+                station_file = "IDW60910.95641.json",
+                File_formatted = "23-24_WitchcliffeWest.csv",
+                base_dir = weather_path,
+                verbose = return_verbose
+  )
+  
+}

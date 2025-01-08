@@ -5,7 +5,10 @@ if("data.table" %in% installed.packages()[,"Package"] == FALSE){
   install.packages("data.table")
 }
 if("epiphytoolR" %in% installed.packages()[,"Package"] == FALSE){
-  remotes::install_github("PaulMelloy/epiphytoolR", ref = "dev")
+  remotes::install_github("PaulMelloy/epiphytoolR", 
+                          ref = "fill_weather",
+                          dependencies = TRUE,
+                          upgrade = TRUE)
 }
 
 working_dir <- path.expand("~") # default to users home directory
@@ -15,9 +18,9 @@ library(epiphytoolR)
 
 ## -----------------        Settings        -----------------
 SLEEP <- TRUE
-dl_path <- file.path(working_dir,"Documents/weather/tgz/")
+dl_path <- file.path(working_dir,"weather_data/tgz/")
 dl_time <- format(Sys.time(), format = "%y%m%d_%H%M")
-weather_path <- file.path(working_dir,"Documents/weather/")
+weather_path <- file.path(working_dir,"weather_data")
 
 
 ## ----------            System checks            -----------
