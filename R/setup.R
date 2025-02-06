@@ -4,6 +4,9 @@ if("remotes" %in% installed.packages()[,"Package"] == FALSE){
 if("data.table" %in% installed.packages()[,"Package"] == FALSE){
   install.packages("data.table")
 }
+if("here" %in% installed.packages()[,"Package"] == FALSE){
+  install.packages("here")
+}
 if("epiphytoolR" %in% installed.packages()[,"Package"] == FALSE){
   remotes::install_github("PaulMelloy/epiphytoolR", 
                           ref = "fill_weather",
